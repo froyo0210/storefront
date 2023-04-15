@@ -16,7 +16,7 @@ class Product(models.Model):
     last_update = models.DateTimeField(auto_now=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
     promotions = models.ManyToManyField(Promotion)
-class Custormer(models.Model):
+class Customer(models.Model):
     # email (unique)
     # birth_date (nullable)
 
@@ -54,7 +54,7 @@ class Order(models.Model):
     placed_at = models.DateTimeField(auto_now_add=True)
     payment_status = models.CharField(
         max_length=1, choices=PAYMENT_STATUS_CHOICES, default=PAYMENT_PENDING  )
-    placed_by = models.ForeignKey(Custormer, on_delete=models.PROTECT)
+    placed_by = models.ForeignKey(Customer, on_delete=models.PROTECT)
 
 class OrederItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
@@ -68,7 +68,7 @@ class Address(models.Model):
     city = models.CharField(max_length=255)
     
     # address = models.OneToOneField(Custormer, on_delete=models.CASCADE, primary_key=True)
-    address = models.ForeignKey(Custormer, on_delete=models.CASCADE)
+    address = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
 
 class Cart(models.Model):
